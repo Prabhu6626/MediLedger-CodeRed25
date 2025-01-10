@@ -6,10 +6,9 @@ from datetime import datetime
 
 class Blockchain:
     def __init__(self):
-        # Initialize the blockchain with the genesis block
         self.chain = []
         self.current_transactions = []
-        self.new_block(previous_hash='1', proof=100)  # Create the first block
+        self.new_block(previous_hash='1', proof=100) 
 
     def new_block(self, proof, previous_hash=None):
         """
@@ -26,8 +25,8 @@ class Blockchain:
             'previous_hash': previous_hash or self.hash(self.chain[-1]),
         }
 
-        self.current_transactions = []  # Reset the current transactions
-        self.chain.append(block)  # Add the new block to the chain
+        self.current_transactions = [] 
+        self.chain.append(block)  
         return block
 
     def new_transaction(self, sender, recipient, product_id, status):

@@ -48,7 +48,7 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
             animation: fade-in 2s ease-in-out;
@@ -105,11 +105,14 @@
             }
         }
 
+        /* Scrollable Container for Products */
         .product-list {
             display: flex;
-            flex-wrap: wrap;
+            overflow-x: scroll;
             gap: 1rem;
-            justify-content: center;
+            justify-content: flex-start;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
         }
 
         .product-card {

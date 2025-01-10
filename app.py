@@ -56,7 +56,7 @@ def generate_qr_code(batch_id):
         box_size=10,
         border=4,
     )
-    qr.add_data(f"http://127.0.0.1:5000/track/{batch_id}")
+    qr.add_data(f"http://10.250.57.72:8080/track/{batch_id}")
     qr.make(fit=True)
     qr_code_path = os.path.join('static/qr_codes', f"{batch_id}.png")
     os.makedirs(os.path.dirname(qr_code_path), exist_ok=True)
@@ -191,8 +191,33 @@ def pharmacy():
 @app.route('/track/<batch_id>')
 def track_product(batch_id):
     product = Product.query.filter_by(batch_id=batch_id).first_or_404()
+    
+    # Retrieve the manufacturer (User) and distributor (User) from the Product model
+    manufacturer = User.query.get(product.manufacturer_id)
+    distributor = User.query.filter_by(role='distributor').first()  # Assuming there's one distributor, adjust as needed
+    
+    # Retrieve the tracking history for the product
     history = TrackingHistory.query.filter_by(product_id=product.id).all()
-    return render_template('consumer.html', product=product, history=history)
+
+    # Create a list to store user data (updated_by users)
+    history_details = []
+    for entry in history:
+        updated_user = User.query.get(entry.updated_by)  # Retrieve the user (pharmacy or admin) who updated the status
+        history_details.append({
+            'status': entry.status,
+            'timestamp': entry.timestamp,
+            'updated_by': updated_user.username if updated_user else 'Unknown'
+        })
+
+    # Pass all the necessary information to the template
+    return render_template(
+        'consumer.html', 
+        product=product, 
+        manufacturer=manufacturer,
+        distributor=distributor,
+        history=history_details
+    )
+
 
 # Initialize the Database
 with app.app_context():
@@ -200,5 +225,5 @@ with app.app_context():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080,debug=True)
 

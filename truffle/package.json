@@ -1,0 +1,17 @@
+{
+    "name": "truffle_project",
+    "version": "1.0.0",
+    "description": "Public blockchain for product tracking",
+    "main": "truffle-config.js",
+    "scripts": {
+      "test": "truffle test"
+    },
+    "dependencies": {
+      "@truffle/hdwallet-provider": "^1.8.0",
+      "dotenv": "^10.0.0"
+    },
+    "devDependencies": {},
+    "author": "Nandhini",
+    "license": "MIT"
+  }
+  

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Signup</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #f1f1f1;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* Container for the form */
+        .signup-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            transition: transform 0.3s ease;
+        }
+
+        .signup-container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2d9c95; /* Teal color */
+        }
+
+        /* Form Labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        /* Form Inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #2d9c95; /* Teal border on focus */
+            background-color: #fff; /* Lighter background on focus */
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #2d9c95; /* Teal color */
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #249981; /* Darker teal on hover */
+        }
+
+        /* Link Styling */
+        .link-container {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+
+        .link-container a {
+            color: #2d9c95; /* Teal link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link-container a:hover {
+            color: #249981; /* Darker teal on hover */
+        }
+
+        /* Animation for Form Elements */
+        input,
+        button {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-container {
+                padding: 30px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Doctor Signup</h1>
+        <form action="{{ url_for('doctor_signup') }}" method="POST" enctype="multipart/form-data">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required><br>
+
+            <label for="hospital_name">Hospital Name:</label>
+            <input type="text" id="hospital_name" name="hospital_name" placeholder="Enter your hospital name" required><br>
+
+            <label for="contact_info">Contact Information:</label>
+            <input type="email" id="contact_info" name="contact_info" placeholder="Enter your email" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter a secure password" required><br>
+
+            <label for="id_proof">ID Proof:</label>
+            <input type="file" id="id_proof" name="id_proof" accept=".pdf,.jpg,.png" required><br>
+
+            <button type="submit">Signup</button>
+        </form>
+        
+        <div class="link-container">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

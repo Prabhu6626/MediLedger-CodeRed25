@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Distribution</title>
+</head>
+<body>
+<<form method="POST">
+    <label>Select Product:</label>
+    <select name="product_id">
+        {% for product in products %}
+        <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    </select>
+    
+    <label>Select Batch Number:</label>
+    <select name="batch_number">
+        {% for product in products %}
+        <option value="{{ product.batch_number }}">{{ product.batch_number }}</option>
+        {% endfor %}
+    </select>
+    
+    <label>Current Distribution Stage:</label>
+    <select name="status">
+        <option value="In Transit">In Transit</option>
+        <option value="At Distributor">At Distributor</option>
+    </select>
+    
+    <label>Notes/Remarks:</label>
+    <textarea name="notes"></textarea>
+    
+    <button type="submit">Update Status</button>
+
+
+</form>
+</body>
+</html>

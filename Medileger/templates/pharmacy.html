@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        header {
+            background-color: #00695c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+            font-weight: 500;
+        }
+        h3 {
+            color: #00695c;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .form-container select, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #00695c;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #004d40;
+        }
+        .product-list {
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-card h4 {
+            margin: 10px 0;
+            color: #00695c;
+        }
+        .status-history {
+            font-size: 14px;
+            color: #555;
+        }
+        .status-history li {
+            list-style: none;
+            background-color: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #00695c;
+            color: white;
+        }
+        .logout-button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #00695c;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .logout-button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pharmacy Dashboard</h1>
+        <h2>Track and Update Medicine Status</h2>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <form method="POST">
+                <label for="status">Update Status:</label>
+                <select name="status" required>
+                    <option value="Reached Pharmacy">Reached Pharmacy</option>
+                    <option value="Not Reached Pharmacy">Not Reached Pharmacy</option>
+                </select>
+
+                <label for="product">Select Product:</label>
+                <select name="product_id" required>
+                    {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.name }} (Batch ID: {{ product.batch_id }})</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Update Status</button>
+            </form>
+        </div>
+
+        <h3>Tracking History:</h3>
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product-card">
+                    <h4>{{ product.name }} (Batch ID: {{ product.batch_id }})</h4>
+                    <div class="status-history">
+                        <ul>
+                            {% for history in product.history %}
+                                <li>{{ history.status }} - {{ history.timestamp }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <footer>
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </footer>
+    </div>
+
+    <script>
+        // Example of adding interactivity (optional)
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function() {
+                alert("Product details: " + this.querySelector('h4').innerText);
+            });
+        });
+    </script>
+</body>
+</html>

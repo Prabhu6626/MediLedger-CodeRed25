@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #f1f1f1;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* Container for the form */
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2d9c95; /* Teal color */
+        }
+
+        /* Form Labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        /* Form Inputs */
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #2d9c95; /* Teal border on focus */
+            background-color: #fff; /* Lighter background on focus */
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #2d9c95; /* Teal color */
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #249981; /* Darker teal on hover */
+        }
+
+        /* Link Styling */
+        .link-container {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+
+        .link-container a {
+            color: #2d9c95; /* Teal link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link-container a:hover {
+            color: #249981; /* Darker teal on hover */
+        }
+
+        /* Animation for Form Elements */
+        input,
+        button {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="doctor">Doctor</option>
+                <option value="pharmacy">Pharmacy</option>
+            </select><br>
+
+            <button type="submit">Login</button>
+        </form>
+        
+        <div class="link-container">
+            <p>Don't have an account? <a href="{{ url_for('index') }}">Sign up here</a></p>
+        </div>
+    </div>
+</body>
+</html>

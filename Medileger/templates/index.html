@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Tracking System</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: bg-animation 10s infinite alternate;
+        }
+
+        @keyframes bg-animation {
+            0% {
+                background: linear-gradient(135deg, #4CAF50, #2196F3);
+            }
+            50% {
+                background: linear-gradient(135deg, #2196F3, #4CAF50);
+            }
+            100% {
+                background: linear-gradient(135deg, #4CAF50, #2196F3);
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
+            width: 200%;
+            animation: fade-in 2s ease-in-out;
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            animation: text-slide-in 1.5s ease-in-out;
+        }
+
+        @keyframes text-slide-in {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            animation: text-fade-in 2s ease-in-out;
+        }
+
+        @keyframes text-fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            margin: 0.5rem;
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            background: #1E88E5;
+            transition: background 0.3s, transform 0.3s;
+            animation: button-bounce 2s infinite ease-in-out;
+        }
+
+        .btn:hover {
+            background: #1565C0;
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background: #43A047;
+        }
+
+        .btn-primary:hover {
+            background: #2E7D32;
+        }
+
+        @keyframes button-bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: fade-in 2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Medical Tracking System</h1>
+        <p>Effortlessly manage, track, and secure your medical products and distribution stages.</p>
+        <a href="{{ url_for('login') }}" class="btn">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Prescription less system</a>
+        <footer>&copy; 2025 Medical Tracking System. All rights reserved.</footer>
+    </div>
+</body>
+
+</html>

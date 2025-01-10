@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributor Dashboard</title>
+    <!-- Font and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #43A047, #2196F3);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: bg-animation 10s infinite alternate;
+        }
+
+        @keyframes bg-animation {
+            0% {
+                background: linear-gradient(135deg, #43A047, #2196F3);
+            }
+
+            50% {
+                background: linear-gradient(135deg, #2196F3, #43A047);
+            }
+
+            100% {
+                background: linear-gradient(135deg, #43A047, #2196F3);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fade-in 2s ease-in-out;
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            animation: text-slide-in 1.5s ease-in-out;
+        }
+
+        @keyframes text-slide-in {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            margin-top: 2rem;
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 600;
+            animation: slide-in 1.5s ease-in-out;
+        }
+
+        @keyframes slide-in {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .product-card .status {
+            display: inline-block;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .status-received {
+            background-color: #43A047;
+        }
+
+        .status-ready {
+            background-color: #1E88E5;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        select,
+        button {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        select:focus,
+        button:focus {
+            outline: none;
+            box-shadow: 0px 0px 5px #43A047;
+        }
+
+        button {
+            background: #43A047;
+            color: white;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #388E3C;
+            transform: scale(1.05);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            background: #1E88E5;
+            transition: background 0.3s;
+        }
+
+        a:hover {
+            background: #1565C0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            animation: modal-appear 0.3s ease;
+        }
+
+        @keyframes modal-appear {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #000;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 70%;
+            max-width: 500px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Distributor Dashboard</h1>
+        <h2>All Products from Manufacturers</h2>
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-card">
+                <strong>{{ product.name }} (Batch ID: {{ product.batch_id }})</strong>
+                <br>
+                <img src="{{ url_for('static', filename='qr_codes/' ~ product.batch_id ~ '.png') }}" alt="QR Code">
+                <div class="status {{ 'status-received' if product.status == 'Received' else 'status-ready' }}">
+                    {{ product.status }}
+                </div>
+                <form method="POST" action="{{ url_for('distributor') }}">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <label for="status">Update Status:</label>
+                    <select name="status" required>
+                        <option value="Received">Received</option>
+                        <option value="Ready for Transport">Ready for Transport to Pharmacy</option>
+                    </select>
+                    <button type="submit">Update Status</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <!-- Modal Example (for more product details) -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2>Product Details</h2>
+            <p>More information about the product will go here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        const modal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+
+        function showModal() {
+            modal.style.display = 'flex';
+        }
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

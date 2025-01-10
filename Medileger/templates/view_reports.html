@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Reports</title>
+</head>
+<body>
+    <h1>Reports</h1>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Batch Number</th>
+            <th>QR Code</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.batch_number }}</td>
+            <td>
+                <img src="{{ url_for('static', filename=product.qr_code_path) }}" alt="QR Code">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="exportReports('PDF')">Export as PDF</button>
+    <button onclick="exportReports('Excel')">Export as Excel</button>
+    
+<a href="#">Export as Excel</a>
+</body>
+</html>

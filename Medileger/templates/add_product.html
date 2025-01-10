@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturer Dashboard</title>
+</head>
+<body>
+    <h1>Manufacturer Dashboard</h1>
+    <form method="POST">
+        <label for="name">Product Name:</label>
+        <input type="text" name="name" required><br>
+
+        <label for="drug_category">Drug Category:</label>
+        <select name="drug_category" required>
+            <option value="Antibiotics">Antibiotics</option>
+            <option value="Painkillers">Painkillers</option>
+            <option value="Other">Other</option>
+        </select><br>
+
+        <label for="symptoms_treated">Symptoms Treated:</label>
+        <input type="text" name="symptoms_treated" required><br>
+
+        <label for="usage_instructions">Usage Instructions:</label>
+        <input type="text" name="usage_instructions" required><br>
+
+        <label for="dosage_information">Dosage Information:</label>
+        <input type="text" name="dosage_information" required><br>
+
+        <label for="restrictions_side_effects">Restrictions/Side Effects:</label>
+        <input type="text" name="restrictions_side_effects" required><br>
+
+        <label for="manufacturing_date">Manufacturing Date:</label>
+        <input type="date" name="manufacturing_date" required><br>
+
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="date" name="expiry_date" required><br>
+
+        <label for="batch_number">Batch Number:</label>
+        <input type="text" name="batch_number" required><br>
+
+        <button type="submit">Add Product</button>
+    </form>
+
+    <h2>Your Products</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            {{ product.name }} (Batch ID: {{ product.batch_id }})
+            <br>
+            <img src="{{ url_for('static', filename='qr_codes/' ~ product.batch_id ~ '.png') }}" alt="QR Code">
+            <a href="{{ url_for('view_product', product_id=product.id) }}">View Product Details</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

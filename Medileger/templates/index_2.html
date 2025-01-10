@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription System</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0; /* Light background for a clean look */
+            color: #333; /* Dark text for readability */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        /* Header Styling */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2d9c95; /* Teal color */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            z-index: 10;
+        }
+
+        .logo img {
+            width: 50px; /* Logo size */
+        }
+
+        /* Links Styling */
+        a {
+            color: #2d9c95; /* Teal links */
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff; /* White color on hover */
+        }
+
+        /* Login Container Styling */
+        .login-container {
+            background-color: #ffffff;
+            padding: 90px;
+            border-radius: 15px;
+            text-align: center;
+            width: 400%;
+            max-width: 990px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2d9c95; /* Teal color for the title */
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555; /* Subtle text color */
+        }
+
+        /* Button Styling */
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-container a {
+            padding: 12px 20px;
+            background-color: #2d9c95; /* Teal background */
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-container a:hover {
+            background-color: #249981; /* Darker teal on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px;
+            }
+
+            .login-container {
+                padding: 40px;
+                width: 90%;
+            }
+
+            .logo img {
+                width: 40px; /* Logo size on smaller screens */
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Prescription Logo">
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h1>Welcome to the Prescription System</h1>
+        <p>Manage prescriptions easily for doctors and pharmacies. Sign up or login to get started.</p>
+        <div class="link-container">
+            <a href="{{ url_for('doctor_signup') }}">Doctor Signup</a>
+            <a href="{{ url_for('pharmacy_signup') }}">Pharmacy Signup</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007b7f;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            background-color: #007b7f;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #005f5f;
+        }
+
+        .prescription-list {
+            margin-top: 30px;
+        }
+
+        .prescription-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .prescription-item h4 {
+            margin-bottom: 10px;
+            color: #007b7f;
+        }
+
+        .prescription-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Pharmacy Dashboard</h1>
+    <form action="{{ url_for('pharmacy_dashboard') }}" method="POST">
+        <div class="mb-3">
+            <label for="patient_name" class="form-label">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" class="form-control" required placeholder="Enter patient's name">
+        </div>
+
+        <div class="mb-3">
+            <label for="patient_dob" class="form-label">Patient DOB:</label>
+            <input type="date" id="patient_dob" name="patient_dob" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Search Prescription</button>
+    </form>
+
+    {% if prescriptions %}
+        <div class="prescription-list">
+            <h2>Prescriptions</h2>
+            {% for prescription in prescriptions %}
+            <div class="prescription-item">
+                <h4>Medicines:</h4>
+                <ul>
+                    {% for medicine in prescription.medicine_list.split(', ') %}
+                        <li>{{ medicine }}</li>
+                    {% endfor %}
+                </ul>
+                    <p><strong>Doctor:</strong> {{ prescription.doctor.name }} ({{ prescription.doctor.hospital_name }})</p>
+                    <p><strong>Created At:</strong> {{ prescription.timestamp }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

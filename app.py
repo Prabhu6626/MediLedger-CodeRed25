@@ -56,7 +56,7 @@ def generate_qr_code(batch_id):
         box_size=10,
         border=4,
     )
-    qr.add_data(f"http://10.250.57.72:8080/track/{batch_id}")
+    qr.add_data(f"http://192.168.0.105:8080/track/{batch_id}")
     qr.make(fit=True)
     qr_code_path = os.path.join('static/qr_codes', f"{batch_id}.png")
     os.makedirs(os.path.dirname(qr_code_path), exist_ok=True)
